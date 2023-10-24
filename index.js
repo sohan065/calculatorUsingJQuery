@@ -1,4 +1,4 @@
-const insertNumber = (number) => {
+const insertNumber = (ch) => {
   var existsNumber = $("#result").val();
   var lastCharacter = existsNumber.slice(-1);
 
@@ -8,18 +8,43 @@ const insertNumber = (number) => {
       lastCharacter == "*" ||
       lastCharacter == "/" ||
       lastCharacter == ".") &&
-    lastCharacter == number
+    (ch == "+" || ch == "-" || ch == "*" || ch == "/" || ch == ".")
+  ) {
+    if (lastCharacter == ch) {
+      $("#result").val(existsNumber);
+    } else {
+      if (
+        lastCharacter == "." &&
+        (ch == "+" || ch == "-" || ch == "*" || ch == "/")
+      ) {
+        $("#result").val(existsNumber + ch);
+      } else if (ch == ".") {
+        // if (existsNumber.includes(".")) {
+        //   alert(ch);
+        // }
+
+        $("#result").val(existsNumber + ch);
+      } else {
+        var sliceNumber = $("#result").val().slice(0, -1);
+        $("#result").val(sliceNumber + ch);
+      }
+    }
+  } else if (
+    existsNumber == "" &&
+    (ch == "+" || ch == "-" || ch == "*" || ch == "/")
   ) {
     $("#result").val(existsNumber);
   } else {
-    $("#result").val(existsNumber + number);
-    // if (number == "-" || number == "*" || number == "/") {
-    //   var sliceNumber = $("#result").val().slice(0, -1);
-    //   alert(sliceNumber + number);
-    //   $("#result").val(sliceNumber + number);
+    // if (ch == ".") {
+    //   if (existsNumber.includes(".")) {
+    //     $("#result").val(existsNumber);
+    //   } else {
+    //     $("#result").val(existsNumber + ch);
+    //   }
     // } else {
-
+    //   $("#result").val(existsNumber + ch);
     // }
+    $("#result").val(existsNumber + ch);
   }
 };
 
